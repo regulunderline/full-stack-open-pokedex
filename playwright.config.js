@@ -28,7 +28,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     webServer: {
-      command: 'npm run start',
+      command: 'npm run start-prod',
       url: 'http://localhost:5000',
       timeout: 120 * 1000,
       reuseExistingServer: !process.env.CI,
