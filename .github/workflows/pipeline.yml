@@ -57,14 +57,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Success
-        uses: rjstone/discord-webhook-notify@v2
+      #  uses: rjstone/discord-webhook-notify@v2
         if: ${{ success() }}
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: echo $"WEBHOOK"
-        with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: info
+        # with:
+        #   webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        #   severity: info
       - name: Failure
         uses: rjstone/discord-webhook-notify@v2
         if: ${{ !success() }}
