@@ -65,7 +65,7 @@ jobs:
           content: 'A new version of Pokedox deployed'
           description: 'to https://full-stack-open-pokedex-7hwu.onrender.com/ by ${{ github.event.commits[0].author.name }}'
   notification_Failure:
-    if: ${{ !success() }}
+    if: ${{ !success() && github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
@@ -75,6 +75,8 @@ jobs:
           REPO_OWNER="${{ github.repository_owner }}"
           REPO_NAME="${{ github.event.repository.name }}"
           COMMIT_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/commit/${COMMIT_SHA}"
+          echo "Commit URL: ${COMMIT_URL}"
+          echo "COMMIT_URL=${COMMIT_URL}" >> "$GITHUB_ENV"
       - name: Failure
         uses: sarisia/actions-status-discord@v1
         with:
