@@ -61,10 +61,10 @@ jobs:
         if: ${{ success() }}
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: echo $"WEBHOOK"
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: info
-        run: echo $"WEBHOOK"
       - name: Failure
         uses: rjstone/discord-webhook-notify@v2
         if: ${{ !success() }}
