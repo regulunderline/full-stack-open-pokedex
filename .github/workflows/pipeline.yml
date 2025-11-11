@@ -27,16 +27,16 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      # - name: Install Playwright Browsers
-      #   run: npx playwright install --with-deps
-      # - name: Run Playwright tests
-      #   run: npm run test:e2e
-      # - uses: actions/upload-artifact@v4
-      #   if: ${{ !cancelled() }}
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
-      #     retention-days: 30
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && env.SKIP == 'false' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
@@ -84,4 +84,4 @@ jobs:
           status: Failure 
           nocontext: 'true'
           content: Build failed
-          description: 'commit ${{ env.COMMIT_URL }} broke the build'
+          description: 'commit ${{ env.COMMIT_URL }} by ${{ github.event.commits[0].author.name }} broke the build'

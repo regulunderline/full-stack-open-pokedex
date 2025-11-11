@@ -1,5 +1,5 @@
 const express = require('express')
-//const app = express()
+const app = express()
 
 // get the port from env variable
 const PORT = process.env.PORT || 5000
@@ -12,7 +12,7 @@ app.listen(PORT, () => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('9') // change this string to ensure a new version deployed
+  res.send('10') // change this string to ensure a new version deployed
 })
 
 app.get('/health', (req, res) => {
