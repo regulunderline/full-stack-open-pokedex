@@ -63,7 +63,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nocontext: 'true'
           content: 'A new version of Pokedox deployed'
-          description: 'to https://full-stack-open-pokedex-7hwu.onrender.com/'
+          description: 'to ${{ GITHUB_SERVER_URL }}'
   notification_Failure:
     if: ${{ !success() && github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
