@@ -52,6 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
   notification:
+    dependencies: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
