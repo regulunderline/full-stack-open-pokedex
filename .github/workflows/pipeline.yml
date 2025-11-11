@@ -61,7 +61,7 @@ jobs:
         if: ${{ success() }}
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        run: echo $"WEBHOOK"
+        run: echo "$WEBHOOK"
         # with:
         #   webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         #   severity: info
