@@ -51,8 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
-  notification Success:
+  notification_Success:
     if: ${{ success() }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
@@ -65,8 +64,7 @@ jobs:
           nocontext: 'true'
           content: 'A new version of Pokedox deployed'
           description: 'to https://full-stack-open-pokedex-7hwu.onrender.com/'
-
-  notification Failure:
+  notification_Failure:
     if: ${{ !success() }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
