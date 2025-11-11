@@ -51,23 +51,29 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-  notification:
+  notification_Success:
+    if: ${{ success() && github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Success
-        uses: rjstone/discord-webhook-notify@v2
-        if: ${{ success() }}
-        env:
-          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: info
-        run: echo $"WEBHOOK"
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nocontext: 'true'
+          content: 'A new version of Pokedox deployed'
+          description: 'to https://full-stack-open-pokedex-7hwu.onrender.com/'
+  notification_Failure:
+    if: ${{ !success() && github.event_name == 'push' }}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    steps:
       - name: Failure
-        uses: rjstone/discord-webhook-notify@v2
-        if: ${{ !success() }}
+        uses: sarisia/actions-status-discord@v1
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: error 
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: Failure 
+          nocontext: 'true'
+          content: Build failed
+          description: 'commit ${{ github.action_path }} broke the build'
