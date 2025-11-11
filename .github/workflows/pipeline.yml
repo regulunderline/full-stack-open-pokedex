@@ -84,4 +84,4 @@ jobs:
           status: Failure 
           nocontext: 'true'
           content: Build failed
-          description: 'commit ${{ env.COMMIT_URL }} broke the build'
+          description: 'commit ${{ env.COMMIT_URL }} by ${{ github.event.commits[0].author.name }} broke the build'
