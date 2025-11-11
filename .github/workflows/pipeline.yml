@@ -63,7 +63,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nocontext: 'true'
           content: 'A new version of Pokedox deployed'
-          description: 'to ${{ GITHUB_SERVER_URL }}'
+          description: 'to ${{ github.server_url }}'
   notification_Failure:
     if: ${{ !success() && github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
